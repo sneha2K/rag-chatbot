@@ -1,10 +1,13 @@
 **RAG Chatbot Using LangChain, FAISS, Ollama, and Streamlit**
+
 A Retrieval-Augmented Generation (RAG) chatbot that answers questions using information retrieved from a PDF document. The application uses local embeddings, a FAISS vector database, and a locally running Llama 3.2 model through Ollama. A Streamlit interface provides an interactive way to ask questions.
 
 **Project overview**
+
 Rather than relying only on a language model's general knowledge, this project retrieves relevant passages from a PDF and provides them as context to the model. The sample document used during development was the research paper Attention Is All You Need.
 
 **Key features**
+
 - Load and extract text from a PDF document.
 - Split long text into overlapping chunks.
 - Convert chunks into vector embeddings using sentence-transformers/all-MiniLM-L6-v2.
@@ -14,6 +17,7 @@ Rather than relying only on a language model's general knowledge, this project r
 - Run without a paid LLM API for the local Ollama workflow.
 
 **Architecture**
+
 PDF document
     |
     v
@@ -53,6 +57,7 @@ Answer shown in Streamlit
 | User interface | Streamlit |
 
 **Project structure**
+
 rag-chatbot/
 ├── documents/
 │   └── attention_is_all_you_need.pdf
@@ -63,23 +68,28 @@ rag-chatbot/
 └── README.md
 
 **How I built the project**
+
 **1. Create the project and Python environment**
+
 mkdir rag-chatbot
 cd rag-chatbot
 python3 -m venv venv
 source venv/bin/activate
 
 **2. Install dependencies**
+
 Install the project's declared dependencies:
 pip install -r requirements.txt
 The implementation uses LangChain, FAISS, Sentence Transformers, Streamlit, and the Ollama integration. If setting up without the requirements file, the core packages are:
 pip install langchain langchain-community langchain-text-splitters langchain-huggingface langchain-ollama faiss-cpu sentence-transformers streamlit pypdf
 
 **3. Add a PDF document**
+
 Place the research paper at:
 documents/attention_is_all_you_need.pdf
 
 **4. Load and split the PDF**
+
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -109,6 +119,7 @@ vector_db = FAISS.from_documents(chunks, embeddings)
 FAISS helps find the PDF chunks that are semantically closest to the user's question.
 
 **6. Set up a free local LLM**
+
 Install Ollama and download the model:
 ollama pull llama3.2:3b
 
@@ -120,6 +131,7 @@ llm = ChatOllama(model="llama3.2:3b", temperature=0)
 Make sure Ollama is running before launching the application.
 
 **7. Retrieve relevant context and generate an answer**
+
 The following is a simplified example of the RAG flow:
 question = "What is self-attention in a Transformer?"
 retrieved_docs = vector_db.similarity_search(question, k=4)
@@ -138,8 +150,10 @@ response = llm.invoke(prompt)
 print(response.content)
 
 **8. Launch the Streamlit app**
+
 streamlit run streamlit_app.py
 
 **Why RAG?**
+
 RAG combines retrieval and generation. Instead of asking a model to answer entirely from its training knowledge, the application first retrieves relevant text from a source document. The model then uses that text to produce a grounded answer. This approach can improve relevance, although responses should still be checked against the source.
 

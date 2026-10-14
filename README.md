@@ -1,10 +1,13 @@
 RAG Chatbot Using LangChain, FAISS, Ollama, and Streamlit
+
 A Retrieval-Augmented Generation (RAG) chatbot that answers questions using information retrieved from a PDF document. The application uses local embeddings, a FAISS vector database, and a locally running Llama 3.2 model through Ollama. A Streamlit interface provides an interactive way to ask questions.
 
 Project overview
+
 Rather than relying only on a language model's general knowledge, this project retrieves relevant passages from a PDF and provides them as context to the model. The sample document used during development was the research paper Attention Is All You Need.
 
 Key features
+
 - Load and extract text from a PDF document.
 - Split long text into overlapping chunks.
 - Convert chunks into vector embeddings using sentence-transformers/all-MiniLM-L6-v2.
@@ -14,6 +17,7 @@ Key features
 - Run without a paid LLM API for the local Ollama workflow.
 
 Architecture
+
 PDF document
     |
     v
@@ -41,6 +45,7 @@ Prompt + retrieved context --> Ollama (llama3.2:3b)
 Answer shown in Streamlit
 
 Tech stack
+
 | Component | Technology |
 | --- | --- |
 | Language | Python |
@@ -52,6 +57,7 @@ Tech stack
 | User interface | Streamlit |
 
 Project structure
+
 rag-chatbot/
 ├── documents/
 │   └── attention_is_all_you_need.pdf
@@ -62,6 +68,7 @@ rag-chatbot/
 └── README.md
 
 How I built the project
+
 1. Create the project and Python environment
 mkdir rag-chatbot
 cd rag-chatbot

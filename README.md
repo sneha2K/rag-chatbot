@@ -1,4 +1,4 @@
-RAG Chatbot Using LangChain, FAISS, Ollama, and Streamlit
+**RAG Chatbot Using LangChain, FAISS, Ollama, and Streamlit**
 
 A Retrieval-Augmented Generation (RAG) chatbot that answers questions using information retrieved from a PDF document. The application uses local embeddings, a FAISS vector database, and a locally running Llama 3.2 model through Ollama. A Streamlit interface provides an interactive way to ask questions.
 
